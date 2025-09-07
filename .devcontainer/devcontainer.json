@@ -3,7 +3,12 @@
   // This is a feature-rich, stable image that includes the JDK, Maven, and Gradle.
   // We no longer need the separate "features" block.
   "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
-
+  "features": {
+     "ghcr.io/devcontainers/features/java:1": {
+        "version": "none",
+        "installMaven": "true"
+    }
+  },
   // Forward the application port
   "forwardPorts": [8080],
 
