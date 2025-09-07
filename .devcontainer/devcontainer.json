@@ -1,16 +1,30 @@
 {
-  "name": "Java Interview Codespace",
-  "image": "mcr.microsoft.com/devcontainers/java:0-17",
+  "name": "Java & Maven Interview Codespace",
+  // Use a stable image that includes Java 17
+  "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
 
+  // Explicitly add the Maven feature to the container
+  "features": {
+    "ghcr.io/devcontainers/features/maven:1": {
+      "version": "latest"
+    }
+  },
+
+  // Forward the application port
+  "forwardPorts": [8080],
+
+  // Commands to run after the container is created
+  "postCreateCommand": "mvn -N io.takari:maven:wrapper && chmod +x mvnw",
+
+  // Command to run every time you attach to the codespace
+  "postAttachCommand": "./mvnw spring-boot:run",
+
+  // Configure VS Code settings and extensions
   "customizations": {
     "vscode": {
       "extensions": [
         "vscjava.vscode-java-pack"
       ]
     }
-  },
-
-  "forwardPorts": [8080],
-
-  "postCreateCommand": "./mvnw spring-boot:run"
+  }
 }
