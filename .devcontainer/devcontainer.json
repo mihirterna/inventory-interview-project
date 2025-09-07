@@ -1,25 +1,19 @@
 {
-  "name": "Java & Maven Interview Codespace",
-  // Use a stable image that includes Java 17
+  "name": "Java & Maven Interview Environment",
+  // This is a feature-rich, stable image that includes the JDK, Maven, and Gradle.
+  // We no longer need the separate "features" block.
   "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
-
-  // Explicitly add the Maven feature to the container
-  "features": {
-    "ghcr.io/devcontainers/features/maven:1": {
-      "version": "latest"
-    }
-  },
 
   // Forward the application port
   "forwardPorts": [8080],
 
-  // Commands to run after the container is created
+  // Command to run ONCE after the container is created to set up the project
   "postCreateCommand": "mvn -N io.takari:maven:wrapper && chmod +x mvnw",
 
-  // Command to run every time you attach to the codespace
-  "postAttachCommand": "./mvnw spring-boot:run",
+  // Command to run EVERY TIME you open or reconnect to the codespace
+  "postAttachCommand": "java -version && ./mvnw spring-boot:run",
 
-  // Configure VS Code settings and extensions
+  // Standard VS Code extensions for Java
   "customizations": {
     "vscode": {
       "extensions": [
